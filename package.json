@@ -4,11 +4,13 @@
 	"description": "Learning electron with an workshop app for resizing images",
 	"main": "main.js",
 	"scripts": {
-		"start": "electron ."
+		"start": "electron .",
+		"dev": "nodemon --exec electron ."
 	},
 	"author": "Kaan Yilmaz",
 	"license": "ISC",
 	"devDependencies": {
-		"electron": "^9.0.0"
+		"electron": "^9.0.0",
+		"nodemon": "^2.0.4"
 	}
 }
