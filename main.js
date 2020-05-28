@@ -14,8 +14,8 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 const slash = require('slash');
 const log = require('electron-log');
 
-// Set node env
-process.env.NODE_ENV = 'development';
+// Set node env if there is logic etc
+// process.env.NODE_ENV = 'production';
 
 const isDevMode = process.env.NODE_ENV !== 'production' ? true : false;
 const isMac = process.platform === 'darwin' ? true : false;
