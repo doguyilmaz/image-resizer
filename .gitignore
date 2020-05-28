@@ -1,3 +1,5 @@
+release-builds/*
+
 # Logs
 logs
 *.log
