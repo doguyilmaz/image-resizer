@@ -12,6 +12,7 @@ const imagemin = require('imagemin');
 const imageminPngquant = require('imagemin-pngquant');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const slash = require('slash');
+const log = require('electron-log');
 
 // Set node env
 process.env.NODE_ENV = 'development';
@@ -32,6 +33,7 @@ function createMainWindow() {
 		backgroundColor: '#252b4d',
 		webPreferences: {
 			nodeIntegration: true,
+			enableRemoteModule: true,
 		},
 	});
 
@@ -146,8 +148,9 @@ async function resizeImage({ imgPath, quality, destDir }) {
 		await shell.openPath(destDir);
 
 		mainWindow.webContents.send('img:done');
+		log.info(files);
 	} catch (err) {
-		console.log(err);
+		log.error(err);
 	}
 }
 
