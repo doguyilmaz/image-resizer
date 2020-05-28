@@ -1,4 +1,10 @@
-const { app, BrowserWindow, Menu, globalShortcut } = require('electron');
+const {
+	app,
+	BrowserWindow,
+	Menu,
+	globalShortcut,
+	ipcMain,
+} = require('electron');
 
 // Set node env
 process.env.NODE_ENV = 'development';
@@ -109,6 +115,10 @@ const menu = [
 		  ]
 		: []),
 ];
+
+ipcMain.on('img:resize', (e, opt) => {
+	console.log(opt);
+});
 
 app.on('window-all-closed', () => {
 	if (!isMac) {
