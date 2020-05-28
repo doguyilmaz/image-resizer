@@ -144,6 +144,8 @@ async function resizeImage({ imgPath, quality, destDir }) {
 			],
 		});
 		await shell.openPath(destDir);
+
+		mainWindow.webContents.send('img:done');
 	} catch (err) {
 		console.log(err);
 	}
