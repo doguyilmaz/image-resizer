@@ -7,17 +7,22 @@ const isDevMode = process.env.NODE_ENV !== 'production' ? true : false;
 const isMac = process.platform === 'darwin' ? true : false;
 
 let mainWindow;
-let aboutWindows;
+let aboutWindow;
 
 function createMainWindow() {
 	mainWindow = new BrowserWindow({
 		title: 'Image Resizer',
-		width: 500,
+		width: isDevMode ? 750 : 500,
 		height: 600,
 		icon: `${__dirname}/assets/icons/Icon_256x256.png`,
 		resizable: isDevMode,
 		backgroundColor: '#252b4d',
+		webPreferences: {
+			nodeIntegration: true,
+		},
 	});
+
+	isDevMode && mainWindow.webContents.openDevTools();
 
 	// mainWindow.loadURL(`file://${__dirname}/app/index.html`);
 	mainWindow.loadFile(`${__dirname}/app/index.html`);
@@ -26,11 +31,13 @@ function createMainWindow() {
 function createAboutWindow() {
 	aboutWindow = new BrowserWindow({
 		title: 'About Image Resizer',
-		width: 200,
+		width: 300,
 		height: 200,
 		icon: `${__dirname}/assets/icons/Icon_256x256.png`,
 		resizable: false,
 		backgroundColor: '#e6aa07',
+		autoHideMenuBar: true,
+		// frame: false,
 	});
 
 	aboutWindow.loadFile(`${__dirname}/app/about.html`);
@@ -47,7 +54,10 @@ app.on('ready', () => {
 	// 	mainWindow.toggleDevTools()
 	// );
 
-	mainWindow.on('closed', () => (mainWindow = null));
+	mainWindow.on('closed', () => {
+		mainWindow = null;
+		aboutWindow = null;
+	});
 });
 
 const menu = [
